@@ -1,0 +1,32 @@
+# Start with the official Airflow image
+# FROM apache/airflow:2.9.1
+
+# # Define Oracle Instant Client version
+# ARG client_version="21.1.0.0.0"
+
+# # Define the environment variable
+# ENV LD_LIBRARY_PATH /opt/oracle/instantclient_${client_version}
+
+# USER root
+
+# # Install necessary packages
+# RUN apt-get update && apt-get install -y libaio1 wget unzip \
+#     && mkdir /opt/oracle \
+#     && cd /opt/oracle \
+#     && wget https://download.oracle.com/otn_software/linux/instantclient/${client_version}/instantclient-basiclite-linux.x64-${client_version}.zip \
+#     && unzip instantclient-basiclite-linux.x64-${client_version}.zip \
+#     && rm -f instantclient-basiclite-linux.x64-${client_version}.zip \
+#     && apt-get -y autoremove wget unzip \
+#     && apt-get clean
+
+# USER airflow
+
+# # Install the cx_Oracle package
+# RUN pip install cx_Oracle==8.3.0
+
+# # Install the Airflow Oracle provider
+# RUN pip install apache-airflow-providers-oracle==3.7.0
+
+# RUN pip install apache-airflow-providers-jdbc==4.0.1
+
+# RUN pip install elasticsearch
